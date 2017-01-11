@@ -14,7 +14,11 @@ def generate_rand_ints(num, mini, maxi, col, base, email, format='plain',
 
     headers = {'user-agent': email}
 
+    # make the request
     r = requests.get(url, params=payload, headers=headers)
 
-    # split on the new line
-    return r.text.split('\n')
+    # returns a list of random ints but in string format
+    rand_ints = (str(r.text.rstrip())).strip().split('\n')
+
+    # returns a list of random ints in integer format
+    return [int(num) for num in rand_ints]
